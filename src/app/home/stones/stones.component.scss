@@ -1,0 +1,100 @@
+:host { display: block; padding: 64px 28px; }
+
+.sec-head {
+  max-width: 1400px;
+  margin: 0 auto 40px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.num {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3, #999);
+  margin-bottom: 8px;
+  display: block;
+}
+
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
+  margin: 0;
+  color: var(--ink, #1a1520);
+  em { font-style: italic; color: var(--lilac-deep, #5e4878); }
+}
+
+.lead {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-3, #999);
+  max-width: 360px;
+  text-align: right;
+}
+
+.stones {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.stone-card {
+  background: var(--lilac-tint, #f3eef7);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink, #1a1520);
+
+  small {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: var(--ink-3, #999);
+    margin-top: 2px;
+  }
+}
+
+.desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-2, #555);
+  margin: 0 0 16px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3, #999);
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}

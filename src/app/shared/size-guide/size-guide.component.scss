@@ -1,0 +1,79 @@
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  padding: 3px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+
+  button {
+    flex: 1;
+    appearance: none;
+    border: none;
+    background: transparent;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    color: var(--ink-2, #555);
+    transition: all 0.2s;
+
+    &.on {
+      background: white;
+      color: var(--lilac-deep, #5e4878);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+.intro {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-2, #555);
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+
+  th {
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3, #999);
+    font-weight: 600;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--lilac-soft, #ece3f3);
+  }
+
+  td {
+    padding: 10px 12px;
+    font-size: 13px;
+    color: var(--ink, #1a1520);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  }
+
+  tr:hover td {
+    background: var(--lilac-tint, #f3eef7);
+  }
+}
+
+.tip {
+  background: var(--lilac-tint, #f3eef7);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-2, #555);
+
+  strong {
+    color: var(--lilac-deep, #5e4878);
+  }
+}

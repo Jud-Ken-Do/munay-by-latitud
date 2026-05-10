@@ -1,0 +1,64 @@
+.qstrip {
+  background: var(--lilac-soft, #ece3f3);
+  padding: 14px 28px;
+  margin-top: 24px;
+}
+
+.qstrip-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.glyph {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  color: var(--lilac-deep, #5e4878);
+  line-height: 1;
+}
+
+.word {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--lilac-deep, #5e4878);
+
+  small {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: var(--ink-3, #999);
+    margin-left: 6px;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+.meaning {
+  font-size: 13px;
+  color: var(--ink-2, #555);
+  font-style: italic;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2, #555);
+  background: rgba(255, 255, 255, 0.6);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}

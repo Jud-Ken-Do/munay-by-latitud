@@ -1,0 +1,130 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 99;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 280px;
+  background: #fff;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+
+  &.open {
+    transform: translateX(0);
+  }
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.drawer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--lilac-deep, #5e4878);
+  letter-spacing: 0.05em;
+}
+
+.close-btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--ink-2, #555);
+  cursor: pointer;
+  padding: 4px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--lilac-deep, #5e4878);
+  }
+}
+
+.drawer-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+
+  a {
+    display: flex;
+    flex-direction: column;
+    padding: 14px 24px;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    transition: background 0.15s;
+
+    &:hover {
+      background: var(--lilac-tint, #f3eef7);
+    }
+  }
+
+  .link-es {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--ink-3, #999);
+    line-height: 1.2;
+    margin-bottom: 2px;
+  }
+
+  .link-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink, #1a1520);
+  }
+
+  .filigrana-link {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--lilac-deep, #5e4878);
+    font-weight: 500;
+  }
+}
+
+.drawer-footer {
+  padding: 20px 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.lang-btn {
+  appearance: none;
+  border: 1px solid var(--lilac, #8b6fa9);
+  background: transparent;
+  color: var(--lilac-deep, #5e4878);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover {
+    background: var(--lilac-deep, #5e4878);
+    color: #fff;
+  }
+}

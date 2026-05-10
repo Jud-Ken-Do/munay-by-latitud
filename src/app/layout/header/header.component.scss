@@ -1,0 +1,128 @@
+.hdr {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.hdr-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 28px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+
+  a {
+    text-decoration: none;
+    color: var(--ink-2, #555);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--lilac-deep, #5e4878);
+    }
+  }
+
+  .es {
+    color: var(--ink-3, #999);
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 13px;
+  }
+
+  .filigrana {
+    color: var(--lilac-deep, #5e4878);
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hdr-locale {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3, #999);
+  margin-right: 8px;
+  cursor: pointer;
+  appearance: none;
+  border: none;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 4px 10px;
+  border-radius: 999px;
+  &:hover { background: rgba(0, 0, 0, 0.08); }
+}
+
+.icon-btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--ink-2, #555);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--lilac-deep, #5e4878);
+  }
+}
+
+.count {
+  position: absolute;
+  top: 0;
+  right: -2px;
+  background: var(--lilac-deep, #5e4878);
+  color: white;
+  font-size: 9px;
+  font-weight: 600;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.menu-btn {
+  display: none;
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--ink-2, #555);
+  cursor: pointer;
+  padding: 6px;
+}
+
+@media (max-width: 768px) {
+  .nav { display: none !important; }
+  .hdr-locale { display: none !important; }
+  .menu-btn { display: inline-flex; }
+}

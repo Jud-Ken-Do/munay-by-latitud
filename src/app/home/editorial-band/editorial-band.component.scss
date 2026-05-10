@@ -1,0 +1,113 @@
+.edit-band { padding: 0 28px; }
+
+.edit-band-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  padding: 64px;
+
+  > app-placeholder {
+    position: absolute;
+    inset: 0;
+    opacity: 0.3;
+  }
+}
+
+.text {
+  position: relative;
+  z-index: 1;
+  max-width: 480px;
+  color: white;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+
+  .bar {
+    width: 24px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.6);
+    display: inline-block;
+  }
+}
+
+h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 400;
+  margin: 0 0 16px;
+  line-height: 1.2;
+  em { font-style: italic; }
+}
+
+p {
+  font-size: 14px;
+  line-height: 1.7;
+  opacity: 0.85;
+  margin: 0 0 28px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  color: white;
+  transition: all 0.2s;
+
+  &:hover { background: rgba(255, 255, 255, 0.3); }
+
+  &.ghost {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    &:hover { background: rgba(255, 255, 255, 0.1); }
+  }
+}
+
+.floats {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 16px;
+  z-index: 1;
+}
+
+.float {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+
+  &.f1 { width: 140px; height: 180px; transform: rotate(-3deg); }
+  &.f2 { width: 140px; height: 180px; transform: rotate(2deg) translateY(20px); }
+  &.f3 { width: 140px; height: 180px; transform: rotate(-1deg) translateY(-10px); }
+}

@@ -1,0 +1,108 @@
+.news {
+  padding: 64px 28px;
+}
+
+.news-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  background: var(--lilac-tint, #f3eef7);
+  border-radius: 20px;
+  padding: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3, #999);
+  margin-bottom: 16px;
+
+  .bar {
+    width: 24px;
+    height: 2px;
+    background: var(--lilac-deep, #5e4878);
+    display: inline-block;
+  }
+}
+
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
+  margin: 0 0 16px;
+  color: var(--ink, #1a1520);
+  em { font-style: italic; color: var(--lilac-deep, #5e4878); }
+}
+
+p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-2, #555);
+  margin: 0;
+}
+
+.field {
+  display: flex;
+  gap: 0;
+  margin-bottom: 20px;
+
+  input {
+    flex: 1;
+    padding: 14px 18px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: none;
+    border-radius: 999px 0 0 999px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    background: white;
+
+    &:focus { border-color: var(--lilac, #8b6fa9); }
+  }
+
+  button {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 0 999px 999px 0;
+    background: var(--lilac-deep, #5e4878);
+    color: white;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+    transition: background 0.2s;
+
+    &:hover { opacity: 0.9; }
+  }
+}
+
+.perks {
+  display: flex;
+  gap: 20px;
+}
+
+.p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--ink-2, #555);
+
+  .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--lilac, #8b6fa9);
+  }
+}

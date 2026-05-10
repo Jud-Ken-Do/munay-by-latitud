@@ -1,0 +1,191 @@
+<div class="pd-page">
+
+  @if (product(); as p) {
+
+    <!-- ── Breadcrumb ── -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a routerLink="/">Home</a>
+      <span class="sep">›</span>
+      <a [routerLink]="['/category', p.cat.toLowerCase()]">{{ p.cat }}</a>
+      <span class="sep">›</span>
+      <span class="current">{{ p.name }}</span>
+    </nav>
+
+    <!-- ── Two-Column Grid ── -->
+    <div class="pd-grid">
+
+      <!-- ── Gallery ── -->
+      <div class="gallery">
+        <div class="gallery-main">
+          <app-placeholder [tone]="thumbnailTones()[activeThumb()]" [label]="'// ' + p.id" [image]="activeThumb() === 0 ? p.image : ''" />
+
+          @if (p.label) {
+            <span class="gallery-label" [class]="p.labelTone">{{ p.label }}</span>
+          }
+
+          <span class="gallery-stone">
+            <span class="stone-dot" [style.background]="p.stoneDot"></span>
+            {{ p.stone }}
+          </span>
+        </div>
+
+        <div class="thumbs">
+          @for (tone of thumbnailTones(); track $index) {
+            <div
+              class="thumb"
+              [class.active]="activeThumb() === $index"
+              (click)="selectThumb($index)"
+            >
+              <app-placeholder [tone]="tone" [label]="''" [image]="$index === 0 ? p.image : ''" />
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- ── Info ── -->
+      <div class="info">
+
+        <!-- Name & Price -->
+        <div class="info-header">
+          <p class="product-name-es">{{ p.nameEs }}</p>
+          <h1 class="product-name">{{ p.name }}</h1>
+          <div class="price-row">
+            @if (p.was) {
+              <span class="price-was">${{ p.was }}</span>
+              <span class="price-tag">Sale</span>
+            }
+            <span class="price-sale">${{ p.price }}</span>
+          </div>
+        </div>
+
+        <!-- Rating -->
+        <div class="rating-row">
+          <app-stars [rating]="p.rating" />
+          <span class="reviews-count">({{ p.reviews }} reviews)</span>
+          <span class="sep">·</span>
+          <span class="metal-badge">{{ p.metal }}</span>
+        </div>
+
+        <!-- Stone Info -->
+        <div class="stone-info">
+          <span class="stone-color-dot" [style.background]="p.stoneDot"></span>
+          <span class="stone-label">Stone</span>
+          <span class="stone-name">{{ p.stone }}</span>
+          <span class="stone-sep">|</span>
+          <span class="metal-info">{{ p.metal }}</span>
+        </div>
+
+        <!-- Size Selector -->
+        <div class="size-section">
+          <div class="section-label">
+            <span>Select Size</span>
+            <a href="#" class="size-guide-link" (click)="$event.preventDefault(); sizeGuideOpen.set(true)">Size Guide</a>
+          </div>
+          <div class="size-pills">
+            @for (size of sizes; track size) {
+              <button
+                class="size-pill"
+                [class.selected]="selectedSize() === size"
+                (click)="selectSize(size)"
+              >
+                {{ size }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- Quantity & Add to Cart -->
+        <div class="qty-actions">
+          <div class="qty-control">
+            <button class="qty-btn" (click)="decrementQty()" [disabled]="qty() <= 1" aria-label="Decrease quantity">
+              <app-icon name="minus" [size]="14" />
+            </button>
+            <span class="qty-val">{{ qty() }}</span>
+            <button class="qty-btn" (click)="incrementQty()" aria-label="Increase quantity">
+              <app-icon name="plus" [size]="14" />
+            </button>
+          </div>
+
+          <button class="add-to-cart" (click)="addToCart()">
+            Add to Basket
+          </button>
+
+          <button
+            class="wishlist-btn"
+            [class.loved]="isLoved()"
+            (click)="toggleLoved()"
+            aria-label="Add to wishlist"
+          >
+            <app-icon name="heart" [size]="18" />
+          </button>
+        </div>
+
+        <!-- Description -->
+        <div class="description">
+          <p>
+            Each {{ p.name }} is born from the hands of master silversmiths in the highlands
+            of Colombia, where ancestral craft meets contemporary elegance. Wrought from
+            sterling Plata 950 and set with a hand-selected {{ p.stone | lowercase }} stone sourced
+            from Colombia's storied mines, this piece carries the spirit of the Andes in
+            every curve. No two are identical — slight variations in the stone's colour and
+            the metal's texture are a testament to its wholly handcrafted nature.
+            Designed to be worn every day and treasured for a lifetime.
+          </p>
+        </div>
+
+        <!-- Accordion -->
+        <div class="accordion">
+          @for (section of accordionSections; track section.id) {
+            <div class="accordion-item">
+              <button
+                class="accordion-trigger"
+                (click)="toggleSection(section.id)"
+                [attr.aria-expanded]="isSectionOpen(section.id)"
+              >
+                {{ section.title }}
+                <span class="chevron" [class.open]="isSectionOpen(section.id)">&#8964;</span>
+              </button>
+              <div class="accordion-body" [class.open]="isSectionOpen(section.id)">
+                <p>{{ section.content }}</p>
+              </div>
+            </div>
+          }
+        </div>
+
+      </div><!-- /info -->
+    </div><!-- /pd-grid -->
+
+    <!-- ── Related Products ── -->
+    @if (relatedProducts().length > 0) {
+      <section class="related">
+        <div class="related-header">
+          <p class="related-eyebrow">You May Also Like</p>
+          <h2 class="related-title">More from {{ p.cat }}</h2>
+        </div>
+        <div class="related-grid">
+          @for (rp of relatedProducts(); track rp.id) {
+            <app-product-card
+              [product]="rp"
+              [loved]="wishlist.isLoved(rp.id)"
+              (addToCart)="onRelatedAddToCart($event)"
+              (toggleLove)="wishlist.toggle($event)"
+            />
+          }
+        </div>
+      </section>
+    }
+
+  } @else {
+    <!-- ── Not Found ── -->
+    <div class="not-found">
+      <h2>Product not found</h2>
+      <p>The piece you're looking for may have sold out or moved.</p>
+      <a routerLink="/">
+        <app-icon name="arrow" [size]="14" />
+        Return to Home
+      </a>
+    </div>
+  }
+
+  <app-size-guide [isOpen]="sizeGuideOpen()" (close)="sizeGuideOpen.set(false)" />
+</div>
