@@ -1,4 +1,4 @@
-import { Component, output, inject, signal } from '@angular/core';
+import { Component, output, inject, signal, HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { LogoComponent } from '../../shared/logo/logo.component';
@@ -77,4 +77,12 @@ export class HeaderComponent {
   searchOpen = output();
   mobileMenuOpen = signal(false);
   userMenuOpen = signal(false);
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.user-menu')) {
+      this.userMenuOpen.set(false);
+    }
+  }
 }

@@ -15,18 +15,23 @@ export class AuthService {
   readonly isAdmin = computed(() => this.user()?.role === 'admin');
   readonly userName = computed(() => this.user()?.name ?? '');
 
+  /** Resolves once the initial session check is complete */
+  readonly ready: Promise<void>;
+
   constructor() {
-    this.initAuth();
+    this.ready = this.initAuth();
   }
 
-  private async initAuth() {
-    // Check existing session
-    const { data: { session } } = await this.supabase.client.auth.getSession();
-    if (session?.user) {
-      await this.loadProfile(session.user.id, session.user.email ?? '', session.user.app_metadata?.['provider'] ?? 'email');
+  private async initAuth(): Promise<void> {
+    try {
+      const { data: { session } } = await this.supabase.client.auth.getSession();
+      if (session?.user) {
+        await this.loadProfile(session.user.id, session.user.email ?? '', session.user.app_metadata?.['provider'] ?? 'email');
+      }
+    } catch (e) {
+      console.error('Auth init error:', e);
     }
 
-    // Listen for auth changes
     this.supabase.client.auth.onAuthStateChange(async (event, session) => {
       if (event === 'SIGNED_IN' && session?.user) {
         await this.loadProfile(session.user.id, session.user.email ?? '', session.user.app_metadata?.['provider'] ?? 'email');
