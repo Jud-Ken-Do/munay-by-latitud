@@ -283,8 +283,14 @@ export class CategoryComponent {
   readonly metalOptions  = ['Plata 950', 'Plata 950 · 18k'];
   readonly sortOptions   = SORT_OPTIONS;
 
-  // Derived label for page heading
+  // Derived label for breadcrumb and page heading
   readonly categoryLabel = computed(() => {
+    const cats = this.activeCategories();
+    if (cats.length === 1) {
+      const opt = this.categoryOptions.find(o => o.value === cats[0]);
+      return opt ? `${opt.es} · ${opt.en}` : cats[0];
+    }
+    if (cats.length > 1) return 'Shop';
     const id = this.categoryId();
     if (!id) return '';
     const entry = CATEGORY_LABELS[id.toLowerCase()];
@@ -292,6 +298,12 @@ export class CategoryComponent {
   });
 
   readonly pageTitle = computed(() => {
+    const cats = this.activeCategories();
+    if (cats.length === 1) {
+      const opt = this.categoryOptions.find(o => o.value === cats[0]);
+      return opt ? `${opt.es} · ${opt.en}` : cats[0];
+    }
+    if (cats.length > 1) return 'Shop All';
     const id = this.categoryId();
     if (!id) return 'Shop All';
     const entry = CATEGORY_LABELS[id.toLowerCase()];
