@@ -60,8 +60,10 @@ export class ProductCardComponent {
   selectedSwatch = signal<number>(0);
 
   displayImage = computed(() => {
-    const sw = this.product().swatches;
+    const p = this.product();
+    const sw = p.swatches;
     const idx = this.selectedSwatch();
-    return idx < sw.length ? sw[idx].image : this.product().image;
+    const swatchImage = idx < sw.length ? sw[idx]?.image : '';
+    return swatchImage || p.image || '';
   });
 }

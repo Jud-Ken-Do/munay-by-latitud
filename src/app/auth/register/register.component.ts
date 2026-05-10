@@ -36,7 +36,7 @@ import { LogoComponent } from '../../shared/logo/logo.component';
           }
           <div class="field">
             <label for="name">Full name</label>
-            <input id="name" type="text" placeholder="Sara Latitud" [(ngModel)]="name" name="name" required />
+            <input id="name" type="text" placeholder="Ale Moreno" [(ngModel)]="name" name="name" required />
           </div>
           <div class="field">
             <label for="email">Email</label>

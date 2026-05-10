@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
         <br/>
         <em>Every piece holds the pulse of the hand that made it.</em>
       </q>
-      <span class="who">— Sara Latitud · Founder & Silversmith</span>
+      <span class="who">— Ale Moreno · Founder & Silversmith</span>
     </div>
   `,
   styleUrl: './quote.component.scss'
