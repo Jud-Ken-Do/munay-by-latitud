@@ -30,7 +30,7 @@ import { TranslatePipe } from '../../shared/translate.pipe';
         <div class="body">
           @for (item of cart.items(); track item.id) {
             <div class="item">
-              <div class="img"><app-placeholder [tone]="item.tone" label="//"/></div>
+              <div class="img"><app-placeholder [tone]="item.tone" label="" [image]="item.image"/></div>
               <div class="info">
                 <span class="n">{{ item.name }}</span>
                 <span class="meta">{{ item.metal }} · {{ item.stone }}</span>

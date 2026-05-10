@@ -29,7 +29,7 @@ import { TranslatePipe } from '../../shared/translate.pipe';
           </div>
         </div>
         <div class="hero-img" [style.background]="heroGradient()">
-          <app-placeholder tone="lilac" label="// editorial · model wearing esmeralda set" />
+          <app-placeholder tone="lilac" label="" image="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&h=600&fit=crop" />
           <span class="badge"><span class="pulse"></span>{{ 'hero.madeIn' | translate }}</span>
           <div class="featured">
             <div>

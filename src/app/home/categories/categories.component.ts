@@ -21,7 +21,7 @@ import { TranslatePipe } from '../../shared/translate.pipe';
       <div class="cat-grid">
         @for (c of data.categories(); track c.id; let i = $index) {
           <a class="cat" [routerLink]="['/category', c.id]">
-            <app-placeholder [tone]="c.tone" [label]="'// ' + c.es.toLowerCase() + ' · category'" [image]="categoryImages[c.id]" />
+            <app-placeholder [tone]="c.tone" label="" [image]="categoryImages[c.id]" />
             <span class="meta">— 0{{ i + 1 }} · {{ c.count }} pieces</span>
             <div class="label">
               <div class="name">

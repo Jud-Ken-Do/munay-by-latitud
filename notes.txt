@@ -1,0 +1,41 @@
+ Admin: admin@munaybylatitud.com / admin123 → full product CRUD at /admin
+
+ https://gyonqgtszglhaewgsrvg.supabase.co
+
+ sb_publishable_GCMfFOGr60SUAtGH-RqRnw_A3__Axg8
+
+ postgresql://postgres:[YOUR-PASSWORD]@db.gyonqgtszglhaewgsrvg.supabase.co:5432/postgres
+
+ supabase login
+supabase init
+supabase link --project-ref gyonqgtszglhaewgsrvg
+
+
+env keys, i see them in the frontned 
+secrets, 
+use a backend no? or is subabase doing everything?
+where does the logic lives?
+
+  To set up Google/Facebook login
+
+  In Supabase dashboard → Authentication → Providers:
+  1. Enable Google — add your OAuth Client ID/Secret from Google Cloud Console
+  2. Enable Facebook — add your App ID/Secret from Facebook Developer Console
+
+
+
+
+  In Supabase dashboard → SQL Editor, run:
+  UPDATE profiles SET role = 'admin' WHERE id = '675d8424-b58d-44ee-bbfe-a1bb07c8a06f';
+
+
+  HASSEN.ELBERKENNOU@GMAIL.COM
+
+  https://gyonqgtszglhaewgsrvg.supabase.co/auth/v1/verify?token=deab6e79e39222d2d0b5968b66300186cfcd64eef8a246901f16423e&type=signup&redirect_to=http://localhost:3000
+
+  https://gyonqgtszglhaewgsrvg.supabase.co/auth/v1/verify?token=deab6e79e39222d2d0b5968b66300186cfcd64eef8a246901f16423e&type=signup&redirect_to=https://munay-by-latitud.vercel.app
+
+  UPDATE profiles SET role = 'admin' WHERE email = 'HASSEN.ELBERKENNOU@GMAIL.COM';
+
+    UPDATE profiles SET role = 'admin'
+  WHERE id = (SELECT id FROM auth.users WHERE email = 'HASSEN.ELBERKENNOU@GMAIL.COM');

@@ -12,7 +12,7 @@ import { TranslatePipe } from '../../shared/translate.pipe';
     <section id="story" class="story-section">
       <div class="story">
         <div class="img">
-          <app-placeholder tone="ink" label="// portrait · artisan at the bench" />
+          <app-placeholder tone="ink" label="" image="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=600&h=750&fit=crop" />
         </div>
         <div class="text">
           <span class="num">— {{ 'story.section' | translate }}</span>

@@ -12,7 +12,7 @@ import { Product } from '../../models/product.model';
   template: `
     <div class="prod">
       <a class="prod-img" [routerLink]="['/product', product().id]">
-        <app-placeholder [tone]="product().tone" [label]="'// ' + product().id" [image]="displayImage()" />
+        <app-placeholder [tone]="product().tone" label="" [image]="displayImage()" />
         @if (product().label) {
           <span class="tag-pill" [class]="product().labelTone">{{ product().label }}</span>
         }

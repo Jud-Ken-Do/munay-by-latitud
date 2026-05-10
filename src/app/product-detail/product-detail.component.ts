@@ -83,11 +83,16 @@ export class ProductDetailComponent {
   readonly activeSection = signal<string | null>(null);
   readonly activeThumb = signal(0);
 
-  readonly thumbnailTones = computed<string[]>(() => {
+  readonly galleryImages = computed<{ image: string; tone: string }[]>(() => {
     const p = this.product();
-    if (!p) return ['lilac', 'lilac-deep', 'pearl', 'bone'];
-    const tones = [p.tone, 'lilac-deep', 'pearl', 'bone'];
-    return tones;
+    if (!p) return [];
+    const images: { image: string; tone: string }[] = [{ image: p.image, tone: p.tone }];
+    for (const sw of p.swatches) {
+      if (sw.image && sw.image !== p.image) {
+        images.push({ image: sw.image, tone: p.tone });
+      }
+    }
+    return images;
   });
 
   selectSize(size: Size) {

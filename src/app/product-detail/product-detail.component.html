@@ -17,7 +17,7 @@
       <!-- ── Gallery ── -->
       <div class="gallery">
         <div class="gallery-main">
-          <app-placeholder [tone]="thumbnailTones()[activeThumb()]" [label]="'// ' + p.id" [image]="activeThumb() === 0 ? p.image : ''" />
+          <app-placeholder [tone]="galleryImages()[activeThumb()]?.tone || p.tone" label="" [image]="galleryImages()[activeThumb()]?.image || p.image" />
 
           @if (p.label) {
             <span class="gallery-label" [class]="p.labelTone">{{ p.label }}</span>
@@ -30,13 +30,13 @@
         </div>
 
         <div class="thumbs">
-          @for (tone of thumbnailTones(); track $index) {
+          @for (img of galleryImages(); track $index) {
             <div
               class="thumb"
               [class.active]="activeThumb() === $index"
               (click)="selectThumb($index)"
             >
-              <app-placeholder [tone]="tone" [label]="''" [image]="$index === 0 ? p.image : ''" />
+              <app-placeholder [tone]="img.tone" label="" [image]="img.image" />
             </div>
           }
         </div>

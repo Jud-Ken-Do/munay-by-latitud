@@ -11,7 +11,7 @@ import { ThemeService } from '../../services/theme.service';
   template: `
     <section class="edit-band">
       <div class="edit-band-inner" [style.background]="gradient()">
-        <app-placeholder tone="lilac-deep" label="// filigrana · editorial backdrop" />
+        <app-placeholder tone="lilac-deep" label="" image="https://images.unsplash.com/photo-1630019852942-f89202989a59?w=1200&h=600&fit=crop" />
         <div class="text">
           <span class="kicker"><span class="bar"></span>New collection · 12 pieces</span>
           <h3>Filigrana — <em>thread of silver,</em> spun by hand.</h3>
@@ -22,9 +22,9 @@ import { ThemeService } from '../../services/theme.service';
           </div>
         </div>
         <div class="floats">
-          <div class="float f1"><app-placeholder tone="bone" label="// filigrana ring detail" /></div>
-          <div class="float f2"><app-placeholder tone="amethyst" label="// pendant on velvet" /></div>
-          <div class="float f3"><app-placeholder tone="cream" label="// at the bench" /></div>
+          <div class="float f1"><app-placeholder tone="bone" label="" image="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=300&h=400&fit=crop" /></div>
+          <div class="float f2"><app-placeholder tone="amethyst" label="" image="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=300&h=400&fit=crop" /></div>
+          <div class="float f3"><app-placeholder tone="cream" label="" image="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=300&h=400&fit=crop" /></div>
         </div>
       </div>
     </section>
