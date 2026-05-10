@@ -2,11 +2,13 @@ import { Injectable, inject, signal, computed } from '@angular/core';
 import { Router } from '@angular/router';
 import { User, UserRole } from '../models/user.model';
 import { SupabaseService } from './supabase.service';
+import { ToastService } from './toast.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private supabase = inject(SupabaseService);
   private router = inject(Router);
+  private toast = inject(ToastService);
 
   readonly user = signal<User | null>(null);
   readonly isLoggedIn = computed(() => !!this.user());
@@ -70,10 +72,8 @@ export class AuthService {
   }
 
   async socialLogin(provider: 'google' | 'facebook'): Promise<void> {
-    await this.supabase.client.auth.signInWithOAuth({
-      provider,
-      options: { redirectTo: window.location.origin },
-    });
+    const label = provider === 'google' ? 'Google' : 'Facebook';
+    this.toast.show(`${label} login coming soon`);
   }
 
   async logout(): Promise<void> {
