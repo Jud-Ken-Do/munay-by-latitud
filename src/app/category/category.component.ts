@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal, computed, effect } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
@@ -265,6 +265,18 @@ export class CategoryComponent {
   readonly activeMetals      = signal<string[]>([]);
   readonly sortKey           = signal<SortKey>('featured');
   readonly filtersOpen       = signal(false);
+
+  constructor() {
+    // Reset filters when route param changes
+    effect(() => {
+      this.categoryId(); // track the signal
+      this.activeCategories.set([]);
+      this.activeStones.set([]);
+      this.activePriceRange.set(null);
+      this.activeMetals.set([]);
+      this.sortKey.set('featured');
+    });
+  }
 
 
   // Static options
