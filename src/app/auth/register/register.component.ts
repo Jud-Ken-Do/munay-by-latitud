@@ -69,10 +69,10 @@ export class RegisterComponent {
   error = signal('');
   loading = signal(false);
 
-  onRegister() {
+  async onRegister() {
     this.loading.set(true);
     this.error.set('');
-    const result = this.auth.register(this.name, this.email, this.password);
+    const result = await this.auth.register(this.name, this.email, this.password);
     if (result.success) {
       this.router.navigate(['/']);
     } else {

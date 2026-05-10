@@ -108,11 +108,15 @@ export class ProductListComponent {
     this.deleteTarget.set(p);
   }
 
-  onDelete() {
+  async onDelete() {
     const p = this.deleteTarget();
     if (!p) return;
-    this.data.products.update(products => products.filter(x => x.id !== p.id));
-    this.toast.show('Deleted · ' + p.name);
+    const success = await this.data.deleteProduct(p.id);
+    if (success) {
+      this.toast.show('Deleted · ' + p.name);
+    } else {
+      this.toast.show('Failed to delete product');
+    }
     this.deleteTarget.set(null);
   }
 }

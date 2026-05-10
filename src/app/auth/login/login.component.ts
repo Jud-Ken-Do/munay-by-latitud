@@ -67,10 +67,10 @@ export class LoginComponent {
   error = signal('');
   loading = signal(false);
 
-  onLogin() {
+  async onLogin() {
     this.loading.set(true);
     this.error.set('');
-    const result = this.auth.login(this.email, this.password);
+    const result = await this.auth.login(this.email, this.password);
     if (result.success) {
       this.router.navigate(['/']);
     } else {

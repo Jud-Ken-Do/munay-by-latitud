@@ -186,33 +186,37 @@ export class ProductFormComponent implements OnInit {
     }
   }
 
-  onSave() {
+  async onSave() {
     if (!this.form.name || !this.form.cat || !this.form.price) {
       this.toast.show('Please fill required fields');
       return;
     }
 
     if (this.isEdit) {
-      this.data.products.update(products =>
-        products.map(p => p.id === this.editId ? {
-          ...this.form,
-          id: this.editId,
-          swatches: p.swatches,
-          was: this.form.was || null,
-        } as Product : p)
-      );
-      this.toast.show('Updated · ' + this.form.name);
+      const success = await this.data.updateProduct(this.editId, {
+        ...this.form,
+        was: this.form.was || null,
+      });
+      if (success) {
+        this.toast.show('Updated · ' + this.form.name);
+        this.router.navigate(['/admin/products']);
+      } else {
+        this.toast.show('Failed to update product');
+      }
     } else {
-      const newProduct: Product = {
+      const newProduct: Partial<Product> = {
         ...this.form,
         id: this.form.name.toLowerCase().replace(/\s+/g, '-') + '-' + Date.now(),
         was: this.form.was || null,
         swatches: [{ color: this.form.stoneDot, image: this.form.image || '' }],
       };
-      this.data.products.update(products => [...products, newProduct]);
-      this.toast.show('Created · ' + this.form.name);
+      const success = await this.data.createProduct(newProduct);
+      if (success) {
+        this.toast.show('Created · ' + this.form.name);
+        this.router.navigate(['/admin/products']);
+      } else {
+        this.toast.show('Failed to create product');
+      }
     }
-
-    this.router.navigate(['/admin/products']);
   }
 }

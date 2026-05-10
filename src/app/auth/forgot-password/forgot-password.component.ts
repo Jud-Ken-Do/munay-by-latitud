@@ -50,7 +50,7 @@ export class ForgotPasswordComponent {
   message = signal('');
   loading = signal(false);
 
-  onSubmit() {
+  async onSubmit() {
     this.loading.set(true);
     this.error.set('');
     if (!this.email) {
@@ -58,10 +58,12 @@ export class ForgotPasswordComponent {
       this.loading.set(false);
       return;
     }
-    const result = this.auth.forgotPassword(this.email);
+    const result = await this.auth.forgotPassword(this.email);
     if (result.success) {
       this.success.set(true);
       this.message.set(result.message);
+    } else {
+      this.error.set(result.message);
     }
     this.loading.set(false);
   }
