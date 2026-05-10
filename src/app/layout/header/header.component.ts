@@ -31,8 +31,8 @@ import { TranslatePipe } from '../../shared/translate.pipe';
           <button class="icon-btn" (click)="searchOpen.emit()"><app-icon name="search" /></button>
 
           @if (auth.isLoggedIn()) {
-            <div class="user-menu" (click)="userMenuOpen.set(!userMenuOpen())">
-              <button class="icon-btn user-btn">
+            <div class="user-menu">
+              <button class="icon-btn user-btn" (click)="toggleUserMenu($event)">
                 <app-icon name="user" />
                 <span class="user-name">{{ auth.userName() }}</span>
               </button>
@@ -46,7 +46,7 @@ import { TranslatePipe } from '../../shared/translate.pipe';
                   <a routerLink="/wishlist" class="dropdown-item" (click)="userMenuOpen.set(false)">
                     My Wishlist
                   </a>
-                  <button class="dropdown-item logout" (click)="auth.logout(); userMenuOpen.set(false)">
+                  <button class="dropdown-item logout" (click)="onLogout()">
                     Sign out
                   </button>
                 </div>
@@ -78,11 +78,18 @@ export class HeaderComponent {
   mobileMenuOpen = signal(false);
   userMenuOpen = signal(false);
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: Event) {
-    const target = event.target as HTMLElement;
-    if (!target.closest('.user-menu')) {
-      this.userMenuOpen.set(false);
-    }
+  toggleUserMenu(event: Event) {
+    event.stopPropagation();
+    this.userMenuOpen.set(!this.userMenuOpen());
+  }
+
+  onLogout() {
+    this.userMenuOpen.set(false);
+    this.auth.logout();
+  }
+
+  @HostListener('document:click')
+  onDocumentClick() {
+    this.userMenuOpen.set(false);
   }
 }

@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { ToastService } from '../../services/toast.service';
+import { SupabaseService } from '../../services/supabase.service';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { Product } from '../../models/product.model';
 
@@ -81,14 +82,24 @@ import { Product } from '../../models/product.model';
           <div class="card">
             <h2>Image</h2>
             <div class="field">
-              <label>Image URL</label>
-              <input type="url" [(ngModel)]="form.image" name="image" placeholder="https://images.unsplash.com/..." />
-            </div>
-            @if (form.image) {
-              <div class="image-preview">
-                <img [src]="form.image" alt="Preview" />
+              <label>Upload image</label>
+              <div class="upload-area" (click)="fileInput.click()" (dragover)="$event.preventDefault()" (drop)="onDrop($event)">
+                @if (uploading()) {
+                  <span class="upload-text">Uploading...</span>
+                } @else if (form.image) {
+                  <img [src]="form.image" alt="Preview" class="upload-preview" />
+                  <span class="upload-change">Click to change</span>
+                } @else {
+                  <app-icon name="plus" [size]="24" />
+                  <span class="upload-text">Click or drag image here</span>
+                }
               </div>
-            }
+              <input #fileInput type="file" accept="image/*" hidden (change)="onFileSelect($event)" />
+            </div>
+            <div class="field">
+              <label>Or paste URL</label>
+              <input type="url" [(ngModel)]="form.image" name="image" placeholder="https://..." />
+            </div>
           </div>
         </div>
 
@@ -161,11 +172,13 @@ import { Product } from '../../models/product.model';
 export class ProductFormComponent implements OnInit {
   private data = inject(DataService);
   private toast = inject(ToastService);
+  private supabase = inject(SupabaseService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
   isEdit = false;
   private editId = '';
+  uploading = signal(false);
 
   form: any = {
     name: '', nameEs: '', cat: '', price: 0, was: null,
@@ -184,6 +197,41 @@ export class ProductFormComponent implements OnInit {
         this.form = { ...product };
       }
     }
+  }
+
+  async onFileSelect(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) await this.uploadFile(file);
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    const file = event.dataTransfer?.files?.[0];
+    if (file) this.uploadFile(file);
+  }
+
+  private async uploadFile(file: File) {
+    this.uploading.set(true);
+    const ext = file.name.split('.').pop();
+    const path = `products/${Date.now()}.${ext}`;
+
+    const { error } = await this.supabase.client.storage
+      .from('product-images')
+      .upload(path, file, { upsert: true });
+
+    if (error) {
+      this.toast.show('Upload failed: ' + error.message);
+      this.uploading.set(false);
+      return;
+    }
+
+    const { data: { publicUrl } } = this.supabase.client.storage
+      .from('product-images')
+      .getPublicUrl(path);
+
+    this.form.image = publicUrl;
+    this.uploading.set(false);
+    this.toast.show('Image uploaded');
   }
 
   async onSave() {

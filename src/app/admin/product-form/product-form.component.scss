@@ -87,13 +87,50 @@
   gap: 16px;
 }
 
-.image-preview {
-  margin-top: 12px;
+.upload-area {
+  border: 2px dashed rgba(0, 0, 0, 0.12);
   border-radius: 12px;
-  overflow: hidden;
-  max-height: 200px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  color: var(--ink-3, #999);
+  transition: all 0.2s;
+  position: relative;
+  min-height: 160px;
 
-  img { width: 100%; height: 100%; object-fit: cover; }
+  &:hover {
+    border-color: var(--lilac, #8b6fa9);
+    color: var(--lilac-deep, #5e4878);
+    background: var(--lilac-tint, #f3eef7);
+  }
+}
+
+.upload-text {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+
+.upload-preview {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.upload-change {
+  position: absolute;
+  bottom: 8px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3, #999);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 10px;
+  border-radius: 999px;
 }
 
 .form-actions {
