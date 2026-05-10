@@ -62,8 +62,14 @@ const SORT_OPTIONS: { key: SortKey; label: string }[] = [
       <!-- Main layout -->
       <div class="cat-layout">
 
+        <!-- Mobile filter toggle -->
+        <button class="filter-toggle" (click)="filtersOpen.set(!filtersOpen())">
+          <app-icon name="menu" [size]="16" />
+          {{ filtersOpen() ? 'Hide filters' : 'Show filters' }}
+        </button>
+
         <!-- Sidebar -->
-        <aside class="sidebar">
+        <aside class="sidebar" [class.open]="filtersOpen()">
 
           <!-- Category filter -->
           <div class="filter-group">
@@ -258,6 +264,7 @@ export class CategoryComponent {
   readonly activePriceRange  = signal<PriceRange>(null);
   readonly activeMetals      = signal<string[]>([]);
   readonly sortKey           = signal<SortKey>('featured');
+  readonly filtersOpen       = signal(false);
 
 
   // Static options

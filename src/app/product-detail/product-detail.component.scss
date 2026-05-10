@@ -616,9 +616,15 @@
 
 @media (max-width: 640px) {
   .pd-page { padding: 0 16px 64px; }
-  .product-name { font-size: 32px; }
+  .breadcrumb { margin-bottom: 16px; font-size: 10px; }
+  .product-name { font-size: 28px; }
+  .product-name-es { font-size: 12px; }
+  .thumbs { gap: 8px; }
+  .thumb { width: 60px; height: 60px; }
   .related-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .qty-actions { flex-wrap: wrap; }
   .add-to-cart { flex: 1 1 100%; order: -1; }
   .qty-control { flex: 1; justify-content: center; }
+  .size-pills { flex-wrap: wrap; }
+  .accordion-trigger { font-size: 14px; padding: 14px 0; }
 }

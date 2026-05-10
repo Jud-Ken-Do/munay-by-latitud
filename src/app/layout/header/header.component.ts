@@ -3,9 +3,9 @@ import { RouterLink } from '@angular/router';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { LogoComponent } from '../../shared/logo/logo.component';
 import { CartService } from '../../services/cart.service';
+import { AuthService } from '../../services/auth.service';
 import { MobileMenuComponent } from '../mobile-menu/mobile-menu.component';
 import { I18nService } from '../../services/i18n.service';
-import { ToastService } from '../../services/toast.service';
 import { TranslatePipe } from '../../shared/translate.pipe';
 
 @Component({
@@ -29,7 +29,33 @@ import { TranslatePipe } from '../../shared/translate.pipe';
         <div class="actions">
           <button class="hdr-locale" (click)="i18n.toggle()">{{ i18n.lang() === 'en' ? 'EN' : 'ES' }}</button>
           <button class="icon-btn" (click)="searchOpen.emit()"><app-icon name="search" /></button>
-          <button class="icon-btn" (click)="toast.show('Account · Coming soon')"><app-icon name="user" /></button>
+
+          @if (auth.isLoggedIn()) {
+            <div class="user-menu" (click)="userMenuOpen.set(!userMenuOpen())">
+              <button class="icon-btn user-btn">
+                <app-icon name="user" />
+                <span class="user-name">{{ auth.userName() }}</span>
+              </button>
+              @if (userMenuOpen()) {
+                <div class="dropdown">
+                  @if (auth.isAdmin()) {
+                    <a routerLink="/admin" class="dropdown-item" (click)="userMenuOpen.set(false)">
+                      Admin Dashboard
+                    </a>
+                  }
+                  <a routerLink="/wishlist" class="dropdown-item" (click)="userMenuOpen.set(false)">
+                    My Wishlist
+                  </a>
+                  <button class="dropdown-item logout" (click)="auth.logout(); userMenuOpen.set(false)">
+                    Sign out
+                  </button>
+                </div>
+              }
+            </div>
+          } @else {
+            <a class="icon-btn" routerLink="/login"><app-icon name="user" /></a>
+          }
+
           <a class="icon-btn" routerLink="/wishlist"><app-icon name="heart" /></a>
           <button class="icon-btn" (click)="cart.open()">
             <app-icon name="bag" />
@@ -46,8 +72,9 @@ import { TranslatePipe } from '../../shared/translate.pipe';
 })
 export class HeaderComponent {
   cart = inject(CartService);
+  auth = inject(AuthService);
   i18n = inject(I18nService);
-  toast = inject(ToastService);
   searchOpen = output();
   mobileMenuOpen = signal(false);
+  userMenuOpen = signal(false);
 }
